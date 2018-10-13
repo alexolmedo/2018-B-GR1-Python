@@ -1,14 +1,14 @@
 alexander = {
-    'nombre':"Alexander",
-    'apellido':'Olmedo',
-    "edad":29,
-    "sueldo":10.1,
+    'nombre': "Alexander",
+    'apellido': 'Olmedo',
+    "edad": 29,
+    "sueldo": 10.1,
     "hijos": [],
     "casado": False,
     "loteria": None,
     "mascota": {
         "nombre": "Luli",
-        "edad":6
+        "edad": 6
     }
 }
 print(alexander)
@@ -32,6 +32,6 @@ alexander["profesion"] = "Estudiante"
 
 print(alexander)
 
-nuevos_valores = {"peso": 170, "altura":169}
+nuevos_valores = {"peso": 170, "altura": 169}
 alexander.update(nuevos_valores)
 print(alexander)
