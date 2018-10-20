@@ -11,7 +11,6 @@ except Exception as err:  # For keys
     print("Error in types")
     print(err.__traceback__)
 
-
 """
 except TypeError as type:  # For keys
     print("Error in types")
