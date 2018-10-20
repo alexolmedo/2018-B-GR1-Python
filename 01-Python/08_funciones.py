@@ -83,3 +83,29 @@ def calculadora(numero_uno, numero_dos, operacion="suma"):
     return switch_operaciones()
 
 print(calculadora(1,2,'division'))
+
+def leer_archivo(path):
+    try:
+        archivo_abierto = open(path)
+        arreglo_lineas_archivo = archivo_abierto.readlines()
+        for linea in arreglo_lineas_archivo:
+            print(linea)
+        archivo_abierto.close()
+    except Exception:
+        print("No se pudo leer el archivo")
+
+leer_archivo('./08_ejemplo.txt')
+
+def agregar_a_archivo(path, *lineas_a_escribir):
+    try:
+        archivo_abierto = open(path, 'a')  # 'a' Agrega nueva linea
+
+        for linea in lineas_a_escribir:
+            archivo_abierto.write("\n"+linea)
+
+        archivo_abierto.close()
+    except Exception:
+        print("No se pudo leer el archivo")
+
+agregar_a_archivo('./08_ejemplo.txt',"Hola esta", "es una prueba")
+leer_archivo('./08_ejemplo.txt')
