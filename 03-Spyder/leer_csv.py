@@ -29,3 +29,9 @@ data_frame_completo_artwork = pd.read_csv(
         usecols=columnas_a_utilizar)
 
 data_frame_completo_artwork.shape
+
+# --> Serialización del DataFrame
+# --> Deserialización del DataFrame
+PATH_GUARDADO ="C://Users//Alexander//Documents//Python//olmedo-vinueza-alexander-daniel//03-Spyder//data//artwork_data_frame.pickle"
+data_frame_completo_artwork.to_pickle(PATH_GUARDADO)
+df = pd.read_pickle(PATH_GUARDADO)
