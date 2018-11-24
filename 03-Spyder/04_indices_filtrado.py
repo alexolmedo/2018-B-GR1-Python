@@ -7,7 +7,7 @@ Created on Wed Nov 21 08:47:00 2018
 import pandas as pd
 import os
 
-directorio_archivo = "C://Users//USRSIG//Documents//GitHub//eguez-sarzosa-vicente-adrian//03-Spyder//data//artwork_data_frame.pickle"
+directorio_archivo = "C://Users//Alexander//Documents//Python//olmedo-vinueza-alexander-daniel//03-Spyder//data//artwork_data_frame.pickle"
 
 df_guardado = pd.read_pickle(directorio_archivo)
 
