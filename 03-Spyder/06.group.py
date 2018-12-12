@@ -64,4 +64,36 @@ def transformar_df_por_artista(df):
     return nuevo_df_lleno
 
 seccion_df_transformada = transformar_df_por_artista(seccion_df)
+
+# Filtrado
+df_agrupado_por_titulo = data_frame_guardado.groupby('title')
+
+print(df_agrupado_por_titulo.size())
+print(type(df_agrupado_por_titulo.size()))
+titulos_contados = df_agrupado_por_titulo.size().sort_values(ascending = False)
+print(titulos_contados)
+
+condicion = lambda x: len(x.index)>1
+
+
+dup_titles_df = df_agrupado_por_titulo.filter(condicion)
+
+# print(dup_titles_df)
+# print(type(dup_titles_df))
+
+dup_titles_df.sort_values('title', inplace=True)
+print(dup_titles_df.sort_values('title', inplace=True))
+
+
+
+
+
+
+
+
+
+
+
+
+
         
