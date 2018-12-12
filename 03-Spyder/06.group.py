@@ -31,6 +31,7 @@ def llenar_valores_vacios(series):
     valores_contados = series.value_counts()
     if valores_contados.empty:
         return series
+    '''
     # 1) iterar y sumar los valores
     sumatoria = 0
     numero_nans = 0
@@ -44,14 +45,23 @@ def llenar_valores_vacios(series):
     valor_mas_utilizado = sumatoria / division
     print(valor_mas_utilizado)
     return valor_mas_utilizado
+    '''
+    print(valores_contados)
+    print(valores_contados.index[0])
+    nuevo_valor = series.fillna(valores_contados.index[0])
+    return nuevo_valor
 
 def transformar_df_por_artista(df):
     agrupado_por_artista = df.groupby('artist')
+    arreglo_dataframes_por_grupo = []
     for nombre_artista, grupo in agrupado_por_artista:
         df_llenado = grupo.copy()
         #print(grupo['height']) # Devuelve una serie
-        df_llenado.loc[:,'height'] = llenar_valores_vacios(grupo['height'])
+        df_llenado.loc[:,'medium'] = llenar_valores_vacios(grupo['medium'])
         #print(df_llenado)
-        
-transformar_df_por_artista(seccion_df)
+        arreglo_dataframes_por_grupo.append(df_llenado)
+    nuevo_df_lleno = pd.concat(arreglo_dataframes_por_grupo)
+    return nuevo_df_lleno
+
+seccion_df_transformada = transformar_df_por_artista(seccion_df)
         
