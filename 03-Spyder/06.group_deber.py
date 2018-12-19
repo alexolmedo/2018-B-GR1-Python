@@ -33,4 +33,9 @@ print(data.groupby(['month', 'item'])['date'].count())
 print(data.groupby(['month', 'network'])['date'].count())
 
 # Múltiples estadísticas
-print(data.groupby(['month', 'item']).agg({'duration':sum,'item': "count"}))  
+print(data.groupby(['month', 'item']).agg(
+        {
+            'duration':sum,
+            'item': "count"
+         }
+        ))  
