@@ -1,9 +1,12 @@
 import scrapy
 
-nombre_archivo = 'book_titles.txt'
+nombre_archivo = 'book_titles.csv'
 
 class MiPrimerSpider(scrapy.Spider):
     name = 'intro_spider'
+    lista_libros=[]
+    lista_precios=[]
+    lista_disponible=[]
 
     def start_requests(self):  ## self = this
         urls = [
@@ -18,6 +21,30 @@ class MiPrimerSpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
-        print (response.css('article > h3 > a::text').extract())
-        #print (response.xpath('//article/h3/a/text()').extract())
-        lista_libros = response.css('title::text').extract()
+
+        ## Guardar nombre: CSS y XPATH
+        ## precio: CSS
+        ## stock: XPATH en un archivo
+
+        lista_libros = response.css('article > h3 > a::text').extract()
+        # print (response.xpath('//article/h3/a/text()').extract())
+        lista_precios = response.css('article > div.product_price > p.price_color::text').extract()
+        lista_disponible = response.xpath('//article/div[2]/p[2]/i').extract()
+        print (lista_libros)
+        print (lista_precios)
+        print (lista_disponible)
+
+
+
+
+        with open(nombre_archivo, 'a+') as f:
+            # for titulo_libro, index in lista_libros:
+            #     f.write(titulo_libro[index]+ "," + lista_precios[index]+"\n")
+
+            for index, titulo_libro in enumerate(lista_libros):
+                if (lista_disponible[index]=="<i class=\"icon-ok\"></i>"):
+                    disponible = '1'
+                else:
+                    disponible = '0'
+                f.write(lista_libros[index]+ "," + lista_precios[index]+ "," + disponible+"\n")
+
