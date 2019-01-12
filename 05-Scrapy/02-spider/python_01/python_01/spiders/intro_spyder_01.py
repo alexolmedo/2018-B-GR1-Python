@@ -38,9 +38,6 @@ class MiPrimerSpider(scrapy.Spider):
 
 
         with open(nombre_archivo, 'a+') as f:
-            # for titulo_libro, index in lista_libros:
-            #     f.write(titulo_libro[index]+ "," + lista_precios[index]+"\n")
-
             for index, titulo_libro in enumerate(lista_libros):
                 if (lista_disponible[index]=="<i class=\"icon-ok\"></i>"):
                     disponible = '1'
