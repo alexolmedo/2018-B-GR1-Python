@@ -1,0 +1,1 @@
+print('HoL4AcOmO'.isalnum())
