@@ -1,20 +1,20 @@
-modelo,pulgadas_pantalla,resolucion_camara,ram
-iPhone XS,5.8,12,4 GB
-iPhone XS Max,6.5,12,4 GB
-iPhone XR,6.1,12,3 GB
-iPhone X (10),5.8,12,3 GB
-iPhone 8 Plus,5.5,12,3 GB
-iPhone 8,4.7,12,2 GB
-iPhone SE,4,12,2 GB
-iPhone 7 Plus,5.5,12,3 GB
-iPhone 7,4.7,12,2 GB
-iPhone 6s Plus,5.5,12,2 GB
-iPhone 6s,4.7,12,2 GB
-iPhone 6 Plus,5.5,8,1 GB
-iPhone 6,4.7,8,1 GB
-iPhone 5S,4,8,1 GB
-iPhone 5C,4,8,1 GB
-iPhone 5,4,8,1 GB
-iPhone 4S,3.5,8,1 GB
-iPhone 4,3.5,5,512 MB
-iPhone 3GS,3.5,3,256 MB
+modelo,pulgadas_pantalla,resolucion_camara,ram,bateria,almacenamiento,fecha
+iPhone XS,5.8,12,4,2658,512,2018-09-28
+iPhone XS Max,6.5,12,4,3174,512,2018-09-28
+iPhone XR,6.1,12,3,2942,256,2018-10-26
+iPhone X (10),5.8,12,3,2716,256,2017-10-27
+iPhone 8 Plus,5.5,12,3,2675,256,2017-09-15
+iPhone 8,4.7,12,2,1821,256,2017-09-15
+iPhone SE,4,12,2,1624,64,2016-03-21
+iPhone 7 Plus,5.5,12,3,2900,256,2016-09-16
+iPhone 7,4.7,12,2,1960,32,2016-09-16
+iPhone 6s Plus,5.5,12,2,2750,128,2015-09-12
+iPhone 6s,4.7,12,2,1715,128,2015-09-12
+iPhone 6 Plus,5.5,8,1,2915,128,2014-09-09
+iPhone 6,4.7,8,1,1810,128,2014-09-09
+iPhone 5S,4,8,1,1570,64,2013-09-10
+iPhone 5C,4,8,1,1507,32,2013-09-10
+iPhone 5,4,8,1,1440,64,2012-09-21
+iPhone 4S,3.5,8,1,1432,64,2011-10-14
+iPhone 4,3.5,5,0.512,1420,32,2010-06-24
+iPhone 3GS,3.5,3,0.256,1219,32,2009-06-19

@@ -34,9 +34,6 @@ class MiPrimerSpider(scrapy.Spider):
         print (lista_precios)
         print (lista_disponible)
 
-
-
-
         with open(nombre_archivo, 'a+') as f:
             for index, titulo_libro in enumerate(lista_libros):
                 if (lista_disponible[index]=="<i class=\"icon-ok\"></i>"):
