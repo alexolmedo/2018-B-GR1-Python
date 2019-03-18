@@ -51,7 +51,7 @@ class MyHTMLParser(HTMLParser):
 
 index = {}
 parser = MyHTMLParser()
-with open("practica_01_documents.xml", 'r', encoding='utf8') as myfile:
+with open("practice_01_documents.xml", 'r', encoding='utf8') as myfile:
     data = myfile.read().replace('\n', '')
 
 data = data.replace('’', ' ')
@@ -62,7 +62,7 @@ parser.feed(data)
 
 sortedIndex = OrderedDict(sorted(index.items(), key=lambda x: x[0]))
 
-with open('result.txt', 'w') as file:
+with open('practice_01_results.txt', 'w') as file:
     for key, value in sortedIndex.items():
         file.write(key+' = \n\t'+str(value)+'\n')
 
