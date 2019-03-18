@@ -1,5 +1,6 @@
 from html.parser import HTMLParser
-
+from operator import itemgetter
+from collections import OrderedDict
 
 class MyHTMLParser(HTMLParser):
 
@@ -33,14 +34,19 @@ class MyHTMLParser(HTMLParser):
                 if word in index:
                     listTemp = list(index[word])
                     # check if document already exists for certain word
-                    if self.currentDoc in listTemp:
-                        break
+                    duplicatedDoc = False
+                    for doc in listTemp:
+                        if (doc[1] == self.currentDoc):
+                            duplicatedDoc = True
+                            doc[0] += 1
+                    if (duplicatedDoc):
+                        index[word] = listTemp
                     else:
-                        listTemp.append(self.currentDoc)
+                        listTemp.append([1, self.currentDoc])
                         index[word] = listTemp
                 # if it doesn't exist create new word in index
                 else:
-                    index[word] = [self.currentDoc]
+                    index[word] = [[1, self.currentDoc]]
 
 
 index = {}
@@ -54,4 +60,6 @@ data = data.lower()
 
 parser.feed(data)
 
-print(index)
+sortedIndex = OrderedDict(sorted(index.items(), key=lambda x: x[0]))
+
+print(sortedIndex)
