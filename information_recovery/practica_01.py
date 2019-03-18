@@ -62,4 +62,9 @@ parser.feed(data)
 
 sortedIndex = OrderedDict(sorted(index.items(), key=lambda x: x[0]))
 
-print(sortedIndex)
+with open('result.txt', 'w') as file:
+    for key, value in sortedIndex.items():
+        file.write(key+' = \n\t'+str(value)+'\n')
+
+
+

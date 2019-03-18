@@ -1,0 +1,44 @@
+arabia = 
+	[[1, 'd4']]
+casablanca = 
+	[[1, 'd1']]
+citizen = 
+	[[1, 'd0']]
+godfather = 
+	[[2, 'd2']]
+gone = 
+	[[1, 'd3']]
+graduate = 
+	[[1, 'd6']]
+in = 
+	[[1, 'd9']]
+kane = 
+	[[1, 'd0']]
+lawrence = 
+	[[1, 'd4']]
+list = 
+	[[1, 'd8']]
+of = 
+	[[1, 'd4'], [2, 'd5']]
+on = 
+	[[1, 'd7']]
+oz = 
+	[[2, 'd5']]
+rain = 
+	[[1, 'd9']]
+s = 
+	[[1, 'd8']]
+schindler = 
+	[[1, 'd8']]
+singin = 
+	[[1, 'd9']]
+the = 
+	[[2, 'd2'], [1, 'd3'], [2, 'd5'], [1, 'd6'], [1, 'd7'], [1, 'd9']]
+waterfront = 
+	[[1, 'd7']]
+wind = 
+	[[1, 'd3']]
+with = 
+	[[1, 'd3']]
+wizard = 
+	[[2, 'd5']]
