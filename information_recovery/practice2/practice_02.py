@@ -1,8 +1,8 @@
 from html.parser import HTMLParser
 from collections import OrderedDict
-import glob
-import errno
 from os import listdir
+import time
+import gzip
 
 class MyHTMLParser(HTMLParser):
 
@@ -54,20 +54,29 @@ class MyHTMLParser(HTMLParser):
 index = {}
 parser = MyHTMLParser()
 
-with open("Practice_02_data/01-Text_Only-Ascii-Coll-1-10-NoSem", 'r', encoding='utf8') as myfile:
-    data = myfile.read().replace('\n', '')
+listaArchivos = listdir('Practice_02_data')
 
-data = data.replace('’', ' ')
-data = data.replace('  ', ' ')
-data = data.lower()
+for indice, archivo in enumerate(listaArchivos):
+    start = time.time()
+    with gzip.open("Practice_02_data/"+archivo, 'rt', encoding='utf8') as myfile:
+        data = myfile.read().replace('\n', '')
 
-parser.feed(data)
+    data = data.replace('’', ' ')
+    data = data.replace('  ', ' ')
+    data = data.lower()
 
-sortedIndex = OrderedDict(sorted(index.items(), key=lambda x: x[0]))
+    parser.feed(data)
 
-with open('practice_01_results.txt', 'w') as file:
-    for key, value in sortedIndex.items():
-        file.write(key+' = \n\t'+str(value)+'\n')
+    sortedIndex = OrderedDict(sorted(index.items(), key=lambda x: x[0]))
+
+    with open(archivo +'_index.txt', 'w') as file:
+        for key, value in sortedIndex.items():
+            file.write(key + ' = \n\t' + str(value) + '\n')
+    end = time.time()
+    print("File " + str(indice) + ": "+ str(end - start) + " s")
+
+
+
 
 
 
