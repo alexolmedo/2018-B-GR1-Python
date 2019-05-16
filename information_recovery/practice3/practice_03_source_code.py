@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from html.parser import HTMLParser
 from collections import OrderedDict
 import zipfile
