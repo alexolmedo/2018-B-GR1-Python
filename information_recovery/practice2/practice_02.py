@@ -3,6 +3,7 @@ from collections import OrderedDict
 from os import listdir
 import time
 import gzip
+import re
 
 class MyHTMLParser(HTMLParser):
 
@@ -30,7 +31,12 @@ class MyHTMLParser(HTMLParser):
         if (self.currentTag == 'docno'):
             self.currentDoc = data
         else:
+            data = re.sub(r'[^a-zA-Z0-9\s]', '', data)
             wordlist = str(data).split(" ")
+            global docLength
+            global numberDocs
+            docLength += len(wordlist)
+            numberDocs += 1
             for word in wordlist:
                 # check if word already exists in index
                 if word in index:
@@ -53,12 +59,14 @@ class MyHTMLParser(HTMLParser):
 
 index = {}
 parser = MyHTMLParser()
+docLength = 0
+numberDocs = 0
 
 listaArchivos = listdir('Practice_02_data')
 
 for indice, archivo in enumerate(listaArchivos):
     start = time.time()
-    with gzip.open("Practice_02_data/"+archivo, 'rt', encoding='utf8') as myfile:
+    with gzip.open("Practice_02_data/" + archivo, 'rt', encoding='utf8') as myfile:
         data = myfile.read().replace('\n', '')
 
     data = data.replace('’', ' ')
@@ -66,17 +74,13 @@ for indice, archivo in enumerate(listaArchivos):
     data = data.lower()
 
     parser.feed(data)
-
+    print("docLength: " + str(docLength))
+    print("avfLentgh: " + str(docLength / numberDocs))
+    print("indexLength: " + str(len(index)))
     sortedIndex = OrderedDict(sorted(index.items(), key=lambda x: x[0]))
 
-    with open(archivo +'_index.txt', 'w') as file:
+    with open(archivo + '_index.txt', 'w') as file:
         for key, value in sortedIndex.items():
             file.write(key + ' = \n\t' + str(value) + '\n')
     end = time.time()
-    print("File " + str(indice) + ": "+ str(end - start) + " s")
-
-
-
-
-
-
+    print("File " + str(indice) + ": " + str(end - start) + " s")
