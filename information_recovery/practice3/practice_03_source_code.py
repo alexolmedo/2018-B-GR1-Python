@@ -38,6 +38,7 @@ class MyHTMLParser(HTMLParser):
             self.currentDoc = data
         else:
             if (len(data) > 1):
+                # Only letters
                 data = re.sub(r'[^a-z\s]', '', data)
                 wordlist = str(data).split(" ")
                 global docLength
@@ -46,14 +47,17 @@ class MyHTMLParser(HTMLParser):
                 print(numberDocs)
                 numberDocs += 1
                 for word in wordlist:
+                    # Discard empty strings
                     if word:
+                        # Remove stopwords
                         if word not in stopWords:
+                            # Apply orter Stemmer
                             word = ps.stem(word)
                             docLength += 1
-                            # check if word already exists in index
+                            # Check if word already exists in index
                             if word in index:
                                 listTemp = list(index[word])
-                                # check if document already exists for certain word
+                                # Check if document already exists for certain word
                                 duplicatedDoc = False
                                 for doc in listTemp:
                                     if (doc[1] == self.currentDoc):
@@ -64,7 +68,7 @@ class MyHTMLParser(HTMLParser):
                                 else:
                                     listTemp.append([1, self.currentDoc])
                                     index[word] = listTemp
-                            # if it doesn't exist create new word in index
+                            # If it doesn't exist create new word in index
                             else:
                                 index[word] = [[1, self.currentDoc]]
 
@@ -73,6 +77,7 @@ index = {}
 parser = MyHTMLParser()
 docLength = 0
 numberDocs = 0
+# Stopword list
 stopWords = ["a", "also", "although", "always", "am", "among", "amongst", "amoungst", "amount", "an", "and", "another",
              "any", "anyhow", "anyone", "anything", "anyway", "anywhere", "are", "around", "as", "at", "back", "be",
              "became",
@@ -84,7 +89,8 @@ stopWords = ["a", "also", "although", "always", "am", "among", "amongst", "amoun
              "fill", "find", "fire", "first", "five", "for", "former", "formerly", "forty", "found", "four", "from",
              "front", "full", "further", "get", "give", "go", "had", "has", "hasnt", "have", "he", "hence", "her",
              "here", "hereafter", "hereby", "herein", "hereupon", "hers", "herself", "him", "himself", "his", "how",
-             "however", "hundred", "i", "ie", "if", "in", "inc", "indeed", "interest", "into", "is", "it", "its", "itself",
+             "however", "hundred", "i", "ie", "if", "in", "inc", "indeed", "interest", "into", "is", "it", "its",
+             "itself",
              "keep", "last", "latter", "latterly", "least", "less", "ltd", "made", "many", "may", "me", "meanwhile",
              "might", "mill", "mine", "more", "moreover", "most", "mostly", "move", "much", "must", "my", "myself",
              "name", "namely", "neither", "never", "nevertheless", "next", "nine", "no", "nobody", "none", "noone",
@@ -107,6 +113,7 @@ start = time.time()
 myzip = zipfile.ZipFile('Text_Only_Ascii_Coll_NoSem.zip', 'r')
 myfile = myzip.open('Text_Only_Ascii_Coll_NoSem')
 data = myfile.read().decode('utf-8').replace("\n", " ")
+# Remove random characters
 data = data.replace('’', ' ')
 data = data.replace('-', ' ')
 data = data.replace('.', ' ')
@@ -119,6 +126,7 @@ data = data.replace('_', ' ')
 data = data.replace(';', ' ')
 data = data.replace('(', ' ')
 data = data.replace(')', ' ')
+# Remove duplicated spaces
 data = " ".join(data.split())
 data = data.lower()
 
@@ -128,10 +136,12 @@ print("avfLentgh: " + str(docLength / numberDocs))
 print("indexLength: " + str(len(index)))
 sortedIndex = OrderedDict(sorted(index.items(), key=lambda x: x[0]))
 
+# Save index .txt file
 with open('Text_Only_Ascii_Coll_NoSem_index.txt', 'w') as file:
     for key, value in sortedIndex.items():
         file.write(str(len(value)) + "=df(" + key + ')\n\t' + str(value) + '\n')
 
+# Save index dictionary in disc
 with open('index.pkl', 'wb') as f:
     pickle.dump(sortedIndex, f, pickle.HIGHEST_PROTOCOL)
 
