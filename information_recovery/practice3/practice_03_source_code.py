@@ -44,26 +44,26 @@ class MyHTMLParser(HTMLParser):
             print(numberDocs)
             numberDocs += 1
             for word in wordlist:
-                # if word not in stopWords:
-                # word = ps.stem(word)
-                docLength += 1
-                # check if word already exists in index
-                if word in index:
-                    listTemp = list(index[word])
-                    # check if document already exists for certain word
-                    duplicatedDoc = False
-                    for doc in listTemp:
-                        if (doc[1] == self.currentDoc):
-                            duplicatedDoc = True
-                            doc[0] += 1
-                    if (duplicatedDoc):
-                        index[word] = listTemp
+                if word not in stopWords:
+                    word = ps.stem(word)
+                    docLength += 1
+                    # check if word already exists in index
+                    if word in index:
+                        listTemp = list(index[word])
+                        # check if document already exists for certain word
+                        duplicatedDoc = False
+                        for doc in listTemp:
+                            if (doc[1] == self.currentDoc):
+                                duplicatedDoc = True
+                                doc[0] += 1
+                        if (duplicatedDoc):
+                            index[word] = listTemp
+                        else:
+                            listTemp.append([1, self.currentDoc])
+                            index[word] = listTemp
+                    # if it doesn't exist create new word in index
                     else:
-                        listTemp.append([1, self.currentDoc])
-                        index[word] = listTemp
-                # if it doesn't exist create new word in index
-                else:
-                    index[word] = [[1, self.currentDoc]]
+                        index[word] = [[1, self.currentDoc]]
 
 
 index = {}
@@ -101,11 +101,19 @@ stopWords = ["also", "although", "always", "am", "among", "amongst", "amoungst",
 
 start = time.time()
 
-myzip= zipfile.ZipFile('Text_Only_Ascii_Coll_NoSem.zip', 'r')
-myfile =  myzip.open('Text_Only_Ascii_Coll_NoSem')
+myzip = zipfile.ZipFile('Text_Only_Ascii_Coll_NoSem.zip', 'r')
+myfile = myzip.open('Text_Only_Ascii_Coll_NoSem')
 data = myfile.read().decode('utf-8').replace("\n", "")
 data = data.replace('’', ' ')
-data = data.replace('  ', ' ')
+data = data.replace('-', ' ')
+data = data.replace('.', ' ')
+data = data.replace('=', ' ')
+data = data.replace(':', ' ')
+data = data.replace(',', ' ')
+data = data.replace('\'', ' ')
+data = data.replace('_', ' ')
+data = data.replace(';', ' ')
+data = " ".join(data.split())
 data = data.lower()
 
 parser.feed(data)
@@ -116,6 +124,6 @@ sortedIndex = OrderedDict(sorted(index.items(), key=lambda x: x[0]))
 
 with open('Text_Only_Ascii_Coll_NoSem_index.txt', 'w') as file:
     for key, value in sortedIndex.items():
-        file.write(key + ' = \n\t' + str(value) + '\n')
+        file.write(str(len(value)) + "=df(" + key + ')\n\t' + str(value) + '\n')
 end = time.time()
 print("Time : " + str(end - start) + " s")

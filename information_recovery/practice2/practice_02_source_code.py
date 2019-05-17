@@ -8,6 +8,7 @@ from nltk.stem import PorterStemmer
 
 ps = PorterStemmer()
 
+
 class MyHTMLParser(HTMLParser):
 
     def __init__(self):
@@ -102,9 +103,16 @@ for indice, archivo in enumerate(listaArchivos):
     start = time.time()
     with gzip.open("Practice_02_data/" + archivo, 'rt', encoding='utf8') as myfile:
         data = myfile.read().replace('\n', '')
-
     data = data.replace('’', ' ')
-    data = data.replace('  ', ' ')
+    data = data.replace('-', ' ')
+    data = data.replace('.', ' ')
+    data = data.replace('=', ' ')
+    data = data.replace(':', ' ')
+    data = data.replace(',', ' ')
+    data = data.replace('\'', ' ')
+    data = data.replace('_', ' ')
+    data = data.replace(';', ' ')
+    data = " ".join(data.split())
     data = data.lower()
 
     parser.feed(data)
@@ -115,6 +123,6 @@ for indice, archivo in enumerate(listaArchivos):
 
     with open(archivo + '_index.txt', 'w') as file:
         for key, value in sortedIndex.items():
-            file.write(key + ' = \n\t' + str(value) + '\n')
+            file.write(str(len(value)) + "=df(" + key + ')\n\t' + str(value) + '\n')
     end = time.time()
     print("File " + str(indice) + ": " + str(end - start) + " s")
